@@ -10,7 +10,7 @@ import { ViewBookModal } from './components/ViewBookModal';
 import { DeleteBookModal } from './components/DeleteBookModal';
 import { Book, BookDTO, BookFormDTO } from './models/Books';
 import { Author } from './models/Author';
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = 'api';
 
 const columns = [
   {

@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-statefulset
+  labels:
+    app: db
+  namespace: 3-tier-app
+spec:
+  replicas: 1
+  serviceName: db-service # Required for StatefulSet networking
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db-cont
+        image: mysql:8.0    
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: password
+        - name: MYSQL_NAME
+          value: react_node_app
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "400m"
+        volumeMounts:
+        - name: db-storage # FIXED: Must match the volumeClaimTemplates name exactly
+          mountPath: /var/lib/mysql             
+  volumeClaimTemplates: # FIXED: Aligned correctly with spec
+  - metadata:
+      name: db-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+

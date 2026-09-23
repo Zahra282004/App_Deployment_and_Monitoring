@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react';
 import { Book } from './models/Books';
 // import { Author } from './models/Author';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = '/api';
 
 ChartJS.register(
   ArcElement,

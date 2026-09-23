@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: 3-tier-app
+data:
+  name: "react_node_app"
+  user: "root"
+  host: "db-service"
