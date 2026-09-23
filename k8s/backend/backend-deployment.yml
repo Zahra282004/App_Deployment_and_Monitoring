@@ -15,6 +15,7 @@ spec:
       labels:
         app: backend
     spec:
+      dnsPolicy: ClusterFirst
       containers:
       - name: backend-cont
         image: zahramurtaza/app-backend-tier:latest
