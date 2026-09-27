@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  namespace: 3-tier-app
+spec:
+  rules:
+  - host: "bookmania.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: frontend-service
+            port:
+              number: 80
+  - host: "bookmania.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/api"
+        backend:
+          service:
+            name: backend-service
+            port:
+              number: 3200
